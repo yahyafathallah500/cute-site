@@ -1,0 +1,135 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<title>goodnight</title>
+
+<style>
+body {
+    margin: 0;
+    height: 100vh;
+    overflow: hidden;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background: linear-gradient(135deg, #0f172a, #3b0764);
+    font-family: Arial, sans-serif;
+    color: white;
+    text-align: center;
+    transition: 0.5s;
+}
+
+.flash {
+    background: #ff4da6 !important;
+}
+
+.card {
+    background: rgba(255,255,255,0.08);
+    padding: 25px;
+    border-radius: 20px;
+    max-width: 340px;
+    backdrop-filter: blur(10px);
+    z-index: 10;
+}
+
+h1 {
+    font-size: 32px;
+}
+
+button {
+    margin-top: 15px;
+    padding: 10px 18px;
+    border: none;
+    border-radius: 12px;
+    background: white;
+    color: black;
+    font-weight: bold;
+    cursor: pointer;
+    transition: 0.3s;
+}
+
+button:active {
+    transform: scale(0.95);
+}
+
+img {
+    width: 120px;
+    border-radius: 15px;
+    margin-top: 10px;
+}
+
+.heart {
+    position: absolute;
+    color: #ff4d6d;
+    font-size: 18px;
+    animation: fall 3s linear forwards;
+}
+
+@keyframes fall {
+    0% { transform: translateY(-10vh); opacity: 1; }
+    100% { transform: translateY(110vh); opacity: 0; }
+}
+
+.cursor-heart {
+    position: absolute;
+    color: #ff4d6d;
+    font-size: 14px;
+    pointer-events: none;
+    animation: pop 1s ease-out forwards;
+}
+
+@keyframes pop {
+    0% { transform: scale(1); opacity: 1; }
+    100% { transform: scale(2); opacity: 0; }
+}
+</style>
+</head>
+
+<body>
+
+<div class="card">
+    <h1>goodnight 💤</h1>
+    <p>sorry if I annoyed you earlier… sleep well 🤍</p>
+
+    <button onclick="love()">I wuv you</button>
+
+    <img src="https://pbs.twimg.com/media/DdSCyYXVwAANQoV.jpg" />
+</div>
+
+<script>
+
+// HEART RAIN + FLASH
+function love() {
+
+    document.body.classList.add("flash");
+    setTimeout(() => document.body.classList.remove("flash"), 400);
+
+    for (let i = 0; i < 60; i++) {
+        let heart = document.createElement("div");
+        heart.className = "heart";
+        heart.innerHTML = "❤️";
+        heart.style.left = Math.random() * window.innerWidth + "px";
+        heart.style.animationDuration = (2 + Math.random() * 2) + "s";
+        document.body.appendChild(heart);
+
+        setTimeout(() => heart.remove(), 4000);
+    }
+}
+
+// CURSOR HEART TRAIL
+document.addEventListener("mousemove", function(e) {
+    let heart = document.createElement("div");
+    heart.className = "cursor-heart";
+    heart.innerHTML = "❤️";
+    heart.style.left = e.pageX + "px";
+    heart.style.top = e.pageY + "px";
+    document.body.appendChild(heart);
+
+    setTimeout(() => heart.remove(), 800);
+});
+
+</script>
+
+</body>
+</html>
